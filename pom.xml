@@ -8,7 +8,6 @@
   <packaging>jar</packaging>
 
   <name>CaSPL</name>
-  <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -112,12 +111,19 @@
  -->
  
  
- 	<repositories>
+<!--  	<repositories>
  		<repository>
        		<id>lib_id</id>
        		<url>file://${project.basedir}/lib</url>
    		</repository>
-   </repositories>
+   </repositories> -->
+   
+<repositories>
+  	<repository>
+        <id>local-maven-repo</id>
+        <url>file:${basedir}/local-maven-repo</url>
+    </repository>
+  </repositories>
 
   <dependencies>
 <!--     <dependency>
@@ -181,12 +187,5 @@
 	</dependency>
 	
   </dependencies>
-  
-<!--     <repositories>
-  	<repository>
-        <id>local-maven-repo</id>
-        <url>file:${basedir}/local-maven-repo</url>
-    </repository>
-  </repositories> -->
   
 </project>
