@@ -12,50 +12,181 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
+  
+ <!--  <build>
+  
+  	<plugins>
+  		<plugin>
+    		<groupId>org.apache.maven.plugins</groupId>
+    		<artifactId>maven-install-plugin</artifactId>
+    		<version>2.5.2</version>
+    		<executions>
+    		
+        		<execution>
+            		<id>FaMaSDK</id>
+            		<phase>clean</phase>
+            		<configuration>
+                		<file>${project.basedir}/lib/FaMaSDK-1.1.1.jar</file>
+                		<repositoryLayout>default</repositoryLayout>
+                		<groupId>es.us.isa</groupId>
+						<artifactId>FaMaSDK</artifactId>
+						<version>1.1.1</version>
+                		<packaging>jar</packaging>
+                		<generatePom>true</generatePom>
+            		</configuration>
+            		<goals>
+                		<goal>install-file</goal>
+            		</goals>
+        		</execution>
+ 		      	<execution>
+            		<id>commons-math</id>
+            		<phase>clean</phase>
+            		<configuration>
+                		<file>${project.basedir}/lib/commons-math-2.2.jar</file>
+                		<repositoryLayout>default</repositoryLayout>
+                		<groupId>org.apache.commons</groupId>
+						<artifactId>commons-math</artifactId>
+						<version>2.2</version>
+                		<packaging>jar</packaging>
+                		<generatePom>true</generatePom>
+            		</configuration>
+            		<goals>
+                		<goal>install-file</goal>
+            		</goals>
+        		</execution>
+      		 	<execution>
+            		<id>sat4jReasoner</id>
+            		<phase>clean</phase>
+            		<configuration>
+                		<file>${project.basedir}/lib/Sat4jReasoner-1.0.1.jar</file>
+                		<repositoryLayout>default</repositoryLayout>
+                		<groupId>es.us.isa</groupId>
+						<artifactId>Sat4jReasoner</artifactId>
+						<version>1.0.1</version>
+                		<packaging>jar</packaging>
+                		<generatePom>true</generatePom>
+            		</configuration>
+            		<goals>
+                		<goal>install-file</goal>
+            		</goals>
+        		</execution>
+        		<execution>
+            		<id>FaMaAttributedModel</id>
+            		<phase>clean</phase>
+            		<configuration>
+                		<file>${project.basedir}/lib/FaMaAttributedModel-1.0.2.jar</file>
+                		<repositoryLayout>default</repositoryLayout>
+                		<groupId>es.us.isa</groupId>
+						<artifactId>FaMaAttributedModel</artifactId>
+						<version>1.0.2</version>
+                		<packaging>jar</packaging>
+                		<generatePom>true</generatePom>
+            		</configuration>
+            		<goals>
+                		<goal>install-file</goal>
+            		</goals>
+        		</execution>	
+				<execution>
+            		<id>FaMaFeatureModel</id>
+            		<phase>clean</phase>
+            		<configuration>
+                		<file>${project.basedir}/lib/FaMaFeatureModel-0.9.1.jar</file>
+                		<repositoryLayout>default</repositoryLayout>
+                		<groupId>es.us.isa</groupId>
+						<artifactId>FaMaFeatureModel</artifactId>
+						<version>0.9.1</version>
+                		<packaging>jar</packaging>
+                		<generatePom>true</generatePom>
+            		</configuration>
+            		<goals>
+                		<goal>install-file</goal>
+            		</goals>
+        		</execution>	
+    		</executions>
+		</plugin>
+  	</plugins>
+  </build>
+ -->
+ 
+ 
+ 	<repositories>
+ 		<repository>
+       		<id>lib_id</id>
+       		<url>file://${project.basedir}/lib</url>
+   		</repository>
+   </repositories>
 
   <dependencies>
-    <dependency>
+<!--     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+    </dependency> -->
+    
+    	<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
 	<dependency>
     	<groupId>com.googlecode.json-simple</groupId>
     	<artifactId>json-simple</artifactId>
     	<version>1.1.1</version>
+	</dependency>  
+	
+		<!-- https://mvnrepository.com/artifact/org.sat4j/org.sat4j.core -->
+	<dependency>
+    	<groupId>org.sat4j</groupId>
+    	<artifactId>org.sat4j.core</artifactId>
+    	<version>2.3.1</version>
+	</dependency>
+    
+   	<dependency>
+		<groupId>es.us.isa</groupId>
+		<artifactId>FaMaSDK</artifactId>
+		<version>1.1.1</version>
+<!-- 	    <scope>system</scope> -->
+<!-- 	    <systemPath>${project.basedir}/lib/FaMaSDK-1.1.1.jar</systemPath> -->
+	</dependency>
+	
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-math</artifactId>
+		<version>2.2</version>
+<!-- 	    <scope>system</scope> -->
+<!-- 	    <systemPath>${project.basedir}/lib/commons-math-2.2.jar</systemPath> -->
 	</dependency>
 
 	<dependency>
 		<groupId>es.us.isa</groupId>
-		<artifactId>FaMaFeatureModel</artifactId>
-		<version>0.9.1</version>
-	    <scope>system</scope>
-	    <systemPath>${project.basedir}/lib/FaMaFeatureModel-0.9.1.jar</systemPath>
+		<artifactId>Sat4jReasoner</artifactId>
+		<version>1.0.1</version>
+<!-- 	    <scope>system</scope> -->
+<!-- 	    <systemPath>${project.basedir}/lib/Sat4jReasoner-1.0.1.jar</systemPath> -->
 	</dependency>
+	
 	<dependency>
 		<groupId>es.us.isa</groupId>
 		<artifactId>FaMaAttributedModel</artifactId>
 		<version>1.0.2</version>
-	    <scope>system</scope>
-	    <systemPath>${project.basedir}/lib/FaMaAttributedModel-1.0.2.jar</systemPath>
+<!-- 	    <scope>system</scope> -->
+<!-- 	    <systemPath>${project.basedir}/lib/FaMaAttributedModel-1.0.2.jar</systemPath> -->
 	</dependency>
 	<dependency>
 		<groupId>es.us.isa</groupId>
-		<artifactId>Sat4jReasoner</artifactId>
-		<version>1.0.1</version>
-	    <scope>system</scope>
-	    <systemPath>${project.basedir}/lib/Sat4jReasoner-1.0.1.jar</systemPath>
-	</dependency>
-		<dependency>
-		<groupId>org.apache.commons</groupId>
-		<artifactId>commons-math</artifactId>
-		<version>2.2</version>
-	    <scope>system</scope>
-	    <systemPath>${project.basedir}/lib/commons-math-2.2.jar</systemPath>
+		<artifactId>FaMaFeatureModel</artifactId>
+		<version>0.9.1</version>
+<!-- 	    <scope>system</scope> -->
+<!-- 	    <systemPath>${project.basedir}/lib/FaMaFeatureModel-0.9.1.jar</systemPath> -->
 	</dependency>
 	
   </dependencies>
+  
+<!--     <repositories>
+  	<repository>
+        <id>local-maven-repo</id>
+        <url>file:${basedir}/local-maven-repo</url>
+    </repository>
+  </repositories> -->
+  
 </project>
