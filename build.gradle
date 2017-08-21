@@ -1,0 +1,33 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'application'
+
+group = 'no.uio.ifi'
+version = '0.1'
+
+description = """CaSPL"""
+mainClassName = 'no.uio.ifi.CaSPL.RunnableDockerApp'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+repositories {
+     flatDir {
+     	dirs 'lib'
+ 	 }
+ 	 mavenCentral()
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version:'1.1.1'
+    compile group: 'org.sat4j', name: 'org.sat4j.core', version:'2.3.1'
+    compile name: 'commons-math-2.2'
+    compile name: 'FaMaAttributedModel-1.0.2'
+    compile name: 'FaMaFeatureModel-0.9.1'
+    compile name: 'FaMaSDK-1.1.1'
+    compile name: 'Sat4jReasoner-1.0.1'
+
+}
