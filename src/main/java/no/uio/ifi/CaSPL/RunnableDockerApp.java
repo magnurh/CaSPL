@@ -1,5 +1,4 @@
 package no.uio.ifi.CaSPL;
-
 import es.us.isa.utils.BettyException;
 import no.uio.ifi.cfmDatasetGenerator.DatasetGenerator;
 
@@ -12,7 +11,7 @@ public class RunnableDockerApp {
 		int sizeOfDataSet = 10;
 		
 		// CFM Parameters
-		int numberOfFeatures = 2000;
+		int numberOfFeatures = 50;
 		int percentageOfCrossTreeConstraints = 35;
 		int maxPercentageOfVFs = 17;
 		int contextMaxSize = 13;
@@ -31,7 +30,10 @@ public class RunnableDockerApp {
 		int pathSearchDepth = 5;
 		int maxTriesPathRequirement = 20;
 		
-		boolean hyvarrecInputScript = false;
+		//boolean hyvarrecInputScript = false;		// Implement as a setting to toggle returning hvr-script
+		
+		System.out.println("Hello World!");
+		System.out.println(System.getProperty("java.class.path"));
 		
 		DatasetGenerator generator = new DatasetGenerator(dataSetName, sizeOfDataSet, numberOfFeatures, percentageOfCrossTreeConstraints, maxPercentageOfVFs);
 		generator.setRelationshipParameters(mandatoryProbability, optionalProbability, alternativeProbability, orProbability);
