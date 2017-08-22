@@ -51,8 +51,8 @@ public class DatasetGenerator {
 	
 	//Attributes
 	private int maxAttrPerFeature = 1;
-	private int minAttrRange = 0;
-	private int maxAttrRange = 100;
+	private int minAttrValue = 0;
+	private int maxAttrValue = 100;
 	
 	//Context
 	private int contextMaxSize = 10;
@@ -66,6 +66,9 @@ public class DatasetGenerator {
 	private int numberOfPathsRequired = 0;
 	private int pathSearchDepth = 5;
 	private int pathRequirementTries = 0;
+	
+	private boolean writeHVRscript = false;
+	private int hvrPort = 4000;
 	
 	
 	public DatasetGenerator(String dataSetName, int sizeDataSet, int numberOfFeatures, int percentageCTC, int maxNumberOfVFs){
@@ -120,8 +123,8 @@ public class DatasetGenerator {
 	 * @param max
 	 */
 	public void setMaxAttributeRange(int min, int max){
-		minAttrRange = min;
-		maxAttrRange = max;
+		minAttrValue = min;
+		maxAttrValue = max;
 	}
 	
 	/**
@@ -155,6 +158,10 @@ public class DatasetGenerator {
 		this.pathRequirementTries = maxTries;
 	}
 	
+	public void setHyVarRecScriptSettings(boolean writeHyVarRecScript, int port){
+		this.writeHVRscript = writeHyVarRecScript;
+		this.hvrPort = port;
+	}
 	
 	/**
 	 * Runs BeTTy to generate a *non-attributed* feature model. 
@@ -189,7 +196,9 @@ public class DatasetGenerator {
 	        }else{
 	        	fm = (FAMAFeatureModel) gen.generateFM(characteristics);
 	        }
-			int customRestrictionsScore = customRestrictions(fm, numberOfPathsRequired, pathSearchDepth);
+			int customRestrictionsScore = 0;
+			if(pathRequirementTries > 0) customRestrictionsScore = customRestrictions(fm, numberOfPathsRequired, pathSearchDepth);
+			
 			int restrCounter = 0;
 			FAMAFeatureModel fmTestRestr = fm;
 			while(customRestrictionsScore < 0 && restrCounter < pathRequirementTries){
@@ -217,7 +226,7 @@ public class DatasetGenerator {
 			FMWriter writer = new FMWriter();
 	        writer.saveFM(fm, fmFileDir);
 
-	        FMextender fmParser = new FMextender(numberOfFeatures-1, contextMaxSize, contextMaxValue, maxNumberOfVFs, minAttrRange, maxAttrRange);
+	        FMextender fmParser = new FMextender(numberOfFeatures-1, contextMaxSize, contextMaxValue, maxNumberOfVFs, minAttrValue, maxAttrValue);
 	        JSONObject afmcJSON = fmParser.generateAFMwithContext(fmFileDir);
 	        String jsonFilename = String.format("%04d", i)+"_aFMwC.json";
 	        writeJsonToFile(jsonFilename, directory, afmcJSON);
@@ -227,7 +236,7 @@ public class DatasetGenerator {
 	        
 		}
 		writeLog("./out/data/"+directory+"/dataset.txt", log.toString());
-		writeLog("./out/data/"+directory+"/hyvarrecInputScript.sh", hyvarrecInputScript.toString());
+		if(writeHVRscript) writeLog("./out/data/"+directory+"/hyvarrecInputScript.sh", hyvarrecInputScript.toString()); // writes the hyvarrec input script
 	}
 	
 	/**
@@ -268,15 +277,14 @@ public class DatasetGenerator {
 
 		}
 		writeLog("./out/data/"+directory+"/dataset.txt", log.toString());
-		writeLog("./out/data/"+directory+"/hyvarrecInputScript.sh", hyvarrecInputScript.toString());
+		if(writeHVRscript) writeLog("./out/data/"+directory+"/hyvarrecInputScript.sh", hyvarrecInputScript.toString());
 	}
 	
-	// TODO: Make thresshold and restrictions user settings
 	private int customRestrictions(FAMAFeatureModel fm, int threshold, int depth){
 		Feature root = fm.getRoot();
 		int paths = countMandAltPaths(fm, root, depth);
 //		System.out.println(paths);
-		threshold = Integer.min(threshold, Integer.max(5, (int) (numberOfFeatures*0.10)));
+		threshold = Integer.min(threshold, Integer.max(10, (int) (numberOfFeatures*0.10)));
 		//threshold = Integer.max(Integer.min(15, (int) (numberOfFeatures*0.10)), depth);
 //		System.out.println("t: "+threshold);
 		System.out.println("MandAltPaths: "+paths);
@@ -319,7 +327,7 @@ public class DatasetGenerator {
 	private StringBuilder updateHyvarRecScript(StringBuilder hyvarrecInputScript, String fileName, int iteration){
         if (iteration > 1) hyvarrecInputScript.append("echo >> hyvarrecResult.txt\n");
         hyvarrecInputScript.append("start=`date +%s%N`\n");
-        hyvarrecInputScript.append("curl -H \"Content-Type: application/json\" -X POST -d @./CFM/"+fileName+" http://localhost:4000/process >> hyvarrecResult.txt\n");
+        hyvarrecInputScript.append("curl -H \"Content-Type: application/json\" -X POST -d @./CFM/"+fileName+" http://localhost:"+hvrPort+"/process >> hyvarrecResult.txt\n");
         hyvarrecInputScript.append("echo $(($(expr `date +%s%N` - $start)/1000000)) >> hyvarrecTime.txt\n");
         if( iteration*1.0 % (sizeDataSet*1.0 / 20) == 0) hyvarrecInputScript.append("echo \"progress: "+iteration+"/"+sizeDataSet+"\"\n");
         return hyvarrecInputScript;
@@ -411,9 +419,9 @@ public class DatasetGenerator {
 		characteristics
 				.setDefaultValueDistributionFunction((AttributedCharacteristic.UNIFORM_DISTRIBUTION));
 		
-		characteristics.addRange(new Range(minAttrRange, maxAttrRange));
+		characteristics.addRange(new Range(minAttrValue, maxAttrValue));
 		characteristics.setNumberOfAttibutesPerFeature(maxAttrPerFeature);
-		String argumentsDistributionFunction[] = { ""+minAttrRange, ""+maxAttrRange };
+		String argumentsDistributionFunction[] = { ""+minAttrValue, ""+maxAttrValue };
 		
 		characteristics
 				.setDistributionFunctionArguments(argumentsDistributionFunction);
