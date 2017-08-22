@@ -50,7 +50,7 @@ public class OnlyValidModelSATGenerator extends AbstractFMGeneratorDecorator {
 		
 		int tries = 0;
 
-		while (!valid && tries < maxtries) {
+		while (!valid && tries <= maxtries) {
 //			System.out.println("Attempt number "+(tries+1));
 			model = super.generateFM(ch);
 			FeatureModelTransform fmt= new FeatureModelTransform();
