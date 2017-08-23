@@ -14,13 +14,13 @@
   "contextMaxSize": 10,
   "contextMaxValue": 10,
   "maxPercentageVFs": 20,
-  "system": {
+  "advanced": {
     "simpleMode": false,
     "maxTriesValidModel": 10,
     "maxTriesPathRequirement": 0,
     "requiredNumberOfPathsFromRoot": 5,
     "pathSearchDepth": 5,
     "hyvarrecInputScript": false,
-    "hyvarrecPort": 2001
+    "hyvarrecPort": 4000
   }
 }
