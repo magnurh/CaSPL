@@ -46,6 +46,10 @@ public class DatasetGenerator {
 	private int probMand = 0;
 	private int probOpt = 0;
 	
+	// Tree structure parameters
+	private int maxBranchingFactor;
+	private int maxSetChildren;
+	
 	//Attributes
 	private int maxAttrPerFeature = 1;
 	private int minAttrValue = 0;
@@ -112,6 +116,19 @@ public class DatasetGenerator {
 		this.probOpt = probOpt;
 		this.probAlt = probAlt;
 		this.probOr = probOr;
+	}
+	
+	/**
+	 * Sets the limit of the Feature Model tree branching factor, 
+	 * and max number of children in a group (ALT or OPT)
+	 * @param probMand
+	 * @param probOpt
+	 * @param probAlt
+	 * @param probOr
+	 */
+	public void setTreeStructurePreferences(int maxBranchingFactor, int maxSetChildren) {
+		this.maxBranchingFactor = maxBranchingFactor;
+		this.maxSetChildren = maxSetChildren;
 	}
 	
 	/**
@@ -390,6 +407,8 @@ public class DatasetGenerator {
 	private GeneratorCharacteristics setCharacteristics(GeneratorCharacteristics characteristics){
         characteristics.setNumberOfFeatures(numberOfFeatures);		// Number of features
         characteristics.setPercentageCTC(percentageCTC);
+        characteristics.setMaxBranchingFactor(maxBranchingFactor);
+        characteristics.setMaxSetChildren(maxSetChildren);
         
         if (probAlt + probOr + probMand + probOpt != 0){
 	        characteristics.setProbabilityAlternative(probAlt);
@@ -405,6 +424,8 @@ public class DatasetGenerator {
         characteristics.setNumberOfFeatures(numberOfFeatures);		// Number of features
         characteristics.setPercentageCTC(percentageCTC);
         characteristics.setNumberOfExtendedCTC(maxNumberOfVFs);
+        characteristics.setMaxBranchingFactor(maxBranchingFactor);
+        characteristics.setMaxSetChildren(maxSetChildren);
         
         if (probAlt + probOr + probMand + probOpt != 0){
 	        characteristics.setProbabilityAlternative(probAlt);
