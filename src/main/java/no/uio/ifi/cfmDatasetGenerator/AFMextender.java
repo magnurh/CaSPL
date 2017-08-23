@@ -335,7 +335,7 @@ public class AFMextender implements VarModelExtender{
 	
 	private boolean parse(String filePath){
 		originPath = filePath;
-		System.out.println(filePath);
+		//System.out.println(filePath);
         try {
             Scanner in = new Scanner(new File(filePath));
         	while (in.hasNext()){

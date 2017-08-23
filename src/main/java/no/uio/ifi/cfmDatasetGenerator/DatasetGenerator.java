@@ -1,7 +1,4 @@
 /**
- * 
- */
-/**
  * @author Magnus
  *
  */
@@ -108,8 +105,8 @@ public class DatasetGenerator {
 	 * @param probOr
 	 */
 	public void setRelationshipParameters(int probMand, int probOpt, int probAlt, int probOr){
-		if (probMand + probOpt + probAlt + probOr != 100){
-			System.err.println("Warning: Relationship probabilities should add up to 100 %");
+		if (probMand + probOpt + probAlt + probOr != 100 && probMand + probOpt + probAlt + probOr != 0){
+			System.err.println("Warning: Relationship probabilities must either add up to 100 or 0");
 		}
 		this.probMand = probMand;
 		this.probOpt = probOpt;
@@ -287,7 +284,7 @@ public class DatasetGenerator {
 		threshold = Integer.min(threshold, Integer.max(10, (int) (numberOfFeatures*0.10)));
 		//threshold = Integer.max(Integer.min(15, (int) (numberOfFeatures*0.10)), depth);
 //		System.out.println("t: "+threshold);
-		System.out.println("MandAltPaths: "+paths);
+//		System.out.println("MandAltPaths: "+paths);
 		return paths - threshold;
 	}
 	
@@ -379,6 +376,7 @@ public class DatasetGenerator {
 	
 	private void writeJsonToFile(String fileName, String directory, JSONObject afmcJSON){
         String jsonFileDir = "./out/data/"+directory+"/CFM/"+fileName;
+        System.out.println(jsonFileDir);
         try {
         	FileWriter file = new FileWriter(jsonFileDir);
     		file.write(afmcJSON.toJSONString());
@@ -428,4 +426,6 @@ public class DatasetGenerator {
 		characteristics.setHeadAttributeName("Attr");
 		return characteristics;
 	}
+
+
 }
