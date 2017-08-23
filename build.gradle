@@ -6,7 +6,7 @@ group = 'no.uio.ifi'
 version = '0.1'
 
 description = """CaSPL"""
-mainClassName = 'no.uio.ifi.CaSPL.RunnableDockerApp'
+mainClassName = 'no.uio.ifi.CaSPL.CaSPLgen'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
