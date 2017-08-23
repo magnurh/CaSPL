@@ -24,6 +24,7 @@ repositories {
 dependencies {
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version:'1.1.1'
     compile group: 'org.sat4j', name: 'org.sat4j.core', version:'2.3.1'
+    compile name: 'antlr'
     compile name: 'commons-math-2.2'
     compile name: 'FaMaAttributedModel-1.0.2'
     compile name: 'FaMaFeatureModel-0.9.1'
