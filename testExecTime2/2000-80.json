@@ -1,0 +1,26 @@
+{
+  "dataset_name": "dataset",
+  "sizeDataSet": 100,
+  "numberOfFeatures": 2000,
+  "percentageCTC": 30,
+  "probMand": 0,
+  "probOpt": 0,
+  "probAlt": 0,
+  "probOr": 0,
+  "maxBranchingFactor": 10,
+  "maxSetChildren": 5,
+  "minAttrValue": 0,
+  "maxAttrValue": 100,
+  "contextMaxSize": 80,
+  "contextMaxValue": 10,
+  "maxPercentageVFs": 20,
+  "advanced": {
+    "simpleMode": false,
+    "maxTriesValidModel": 10,
+    "maxTriesPathRequirement": 0,
+    "requiredNumberOfPathsFromRoot": 5,
+    "pathSearchDepth": 5,
+    "hyvarrecInputScript": false,
+    "hyvarrecPort": 4000
+  }
+}
