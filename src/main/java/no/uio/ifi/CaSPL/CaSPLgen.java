@@ -70,21 +70,21 @@ public class CaSPLgen {
 			if(settings.containsKey("contextMaxSize")) contextMaxSize = getIntFromJSON(settings, "contextMaxSize");
 			if(settings.containsKey("contextMaxValue")) contextMaxValue = getIntFromJSON(settings, "contextMaxValue");
 			
-			if(settings.containsKey("system")){
-				JSONObject sys = (JSONObject) settings.get("system");
-				if(sys.containsKey("simpleMode")) simpleMode = (Boolean) sys.get("simpleMode");
-				if(sys.containsKey("maxTriesValidModel")) maxTriesValidModel = getIntFromJSON(sys, "maxTriesValidModel");
+			if(settings.containsKey("advanced")){
+				JSONObject advanced = (JSONObject) settings.get("advanced");
+				if(advanced.containsKey("simpleMode")) simpleMode = (boolean) advanced.get("simpleMode");
+				if(advanced.containsKey("maxTriesValidModel")) maxTriesValidModel = getIntFromJSON(advanced, "maxTriesValidModel");
 				
-				if(sys.containsKey("maxTriesPathRequirement")) maxTriesPathRequirement = getIntFromJSON(sys, "maxTriesPathRequirement");
-				if(sys.containsKey("requiredNumberOfPathsFromRoot")) requiredNumberOfPathsFromRoot = getIntFromJSON(sys, "requiredNumberOfPathsFromRoot");
-				if(sys.containsKey("pathSearchDepth")) pathSearchDepth = getIntFromJSON(sys, "pathSearchDepth");
+				if(advanced.containsKey("maxTriesPathRequirement")) maxTriesPathRequirement = getIntFromJSON(advanced, "maxTriesPathRequirement");
+				if(advanced.containsKey("requiredNumberOfPathsFromRoot")) requiredNumberOfPathsFromRoot = getIntFromJSON(advanced, "requiredNumberOfPathsFromRoot");
+				if(advanced.containsKey("pathSearchDepth")) pathSearchDepth = getIntFromJSON(advanced, "pathSearchDepth");
 				
-				if(sys.containsKey("hyvarrecInputScript")) hyvarrecInputScript = (boolean) sys.get("hyvarrecInputScript");
-				if(sys.containsKey("hyvarrecPort")) hyvarrecPort = getIntFromJSON(sys, "hyvarrecPort");
+				if(advanced.containsKey("hyvarrecInputScript")) hyvarrecInputScript = (boolean) advanced.get("hyvarrecInputScript");
+				if(advanced.containsKey("hyvarrecPort")) hyvarrecPort = getIntFromJSON(advanced, "hyvarrecPort");
 			}
 			
 		}
-		
+
 		DatasetGenerator generator = new DatasetGenerator(dataSetName, sizeDataSet, numberOfFeatures, percentageCTC, maxPercentageVFs);
 		generator.setRelationshipParameters(probMand, probOpt, probAlt, probOr);
 		generator.setTreeStructurePreferences(maxBranchingFactor, maxSetChildren);
