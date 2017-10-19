@@ -393,7 +393,7 @@ public class DatasetGenerator {
 	
 	private void writeJsonToFile(String fileName, String directory, JSONObject afmcJSON){
         String jsonFileDir = "./out/data/"+directory+"/CFM/"+fileName;
-        System.out.println(jsonFileDir);
+        //System.out.println(jsonFileDir);
         try {
         	FileWriter file = new FileWriter(jsonFileDir);
     		file.write(afmcJSON.toJSONString());

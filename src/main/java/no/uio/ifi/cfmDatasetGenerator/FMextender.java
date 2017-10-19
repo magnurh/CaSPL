@@ -305,7 +305,7 @@ public class FMextender implements VarModelExtender{
 				CTCsRemoved++;
 			}
 		}
-		System.out.println("Removed "+CTCsRemoved+" CTCs");
+		//System.out.println("Removed "+CTCsRemoved+" CTCs");
 	}
 	
 	private ArrayList<Integer> addAllFeatureIds(ArrayList<Integer> set){
